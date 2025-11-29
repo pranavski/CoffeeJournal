@@ -23,7 +23,7 @@ struct AddEntryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.creamBackground
+                AppGradients.meshBackground
                     .ignoresSafeArea()
 
                 ScrollView {
@@ -43,7 +43,7 @@ struct AddEntryView: View {
                         // Location
                         FormField(title: "Location", icon: "mappin") {
                             TextField("Coffee shop or home", text: $location)
-                                .textFieldStyle(CoffeeTextFieldStyle())
+                                .textFieldStyle(GlassTextFieldStyle())
                         }
 
                         // Milk Type
@@ -53,7 +53,7 @@ struct AddEntryView: View {
                         FormField(title: "Price (optional)", icon: "dollarsign.circle") {
                             TextField("0.00", text: $price)
                                 .keyboardType(.decimalPad)
-                                .textFieldStyle(CoffeeTextFieldStyle())
+                                .textFieldStyle(GlassTextFieldStyle())
                         }
 
                         // Rating
@@ -69,13 +69,9 @@ struct AddEntryView: View {
                         FormField(title: "Notes", icon: "note.text") {
                             TextEditor(text: $notes)
                                 .frame(minHeight: 100)
-                                .padding(8)
-                                .background(Color.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: 1)
-                                )
+                                .scrollContentBackground(.hidden)
+                                .padding(12)
+                                .glassEffect(.regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 16))
                         }
                     }
                     .padding(16)
@@ -89,7 +85,7 @@ struct AddEntryView: View {
                 }
             }
             .navigationTitle("Add Details")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") { dismiss() }
@@ -139,8 +135,8 @@ struct PhotoPreviewSection: View {
                 .resizable()
                 .scaledToFill()
                 .frame(height: 200)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .shadow(color: .black.opacity(0.1), radius: 10, y: 5)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .glassEffect(.regular.tint(Color.white.opacity(0.2)), in: .rect(cornerRadius: 20))
         }
     }
 }
@@ -178,14 +174,16 @@ struct DrinkTypeButton: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
-            .background(isSelected ? AppGradients.coffeePrimary : AnyShapeStyle(Color.white))
             .foregroundStyle(isSelected ? .white : Color.primaryText)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: isSelected ? 0 : 1)
-            )
+            .background {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(AppGradients.coffeePrimary)
+                }
+            }
+            .glassEffect(isSelected ? .clear : .regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 16))
         }
+        .sensoryFeedback(.selection, trigger: isSelected)
     }
 }
 
@@ -210,13 +208,8 @@ struct SpecificDrinkSection: View {
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color.secondaryText)
                 }
-                .padding(12)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: 1)
-                )
+                .padding(14)
+                .glassEffect(.regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 16))
             }
         }
     }
@@ -230,26 +223,39 @@ struct TemperatureSection: View {
         FormField(title: "Temperature", icon: "thermometer.medium") {
             HStack(spacing: 12) {
                 ForEach(DrinkTemperature.allCases, id: \.self) { temp in
-                    Button(action: { temperature = temp }) {
-                        HStack {
-                            Image(systemName: temp.icon)
-                            Text(temp.rawValue)
-                        }
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(temperature == temp ? AppGradients.coffeePrimary : AnyShapeStyle(Color.white))
-                        .foregroundStyle(temperature == temp ? .white : Color.primaryText)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: temperature == temp ? 0 : 1)
-                        )
+                    TemperatureButton(temp: temp, isSelected: temperature == temp) {
+                        temperature = temp
                     }
                 }
             }
         }
+    }
+}
+
+struct TemperatureButton: View {
+    let temp: DrinkTemperature
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Image(systemName: temp.icon)
+                Text(temp.rawValue)
+            }
+            .font(.subheadline.weight(.medium))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .foregroundStyle(isSelected ? .white : Color.primaryText)
+            .background {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(AppGradients.coffeePrimary)
+                }
+            }
+            .glassEffect(isSelected ? .clear : .regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 16))
+        }
+        .sensoryFeedback(.selection, trigger: isSelected)
     }
 }
 
@@ -262,24 +268,36 @@ struct MilkTypeSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(MilkType.allCases, id: \.self) { milk in
-                        Button(action: { milkType = milk }) {
-                            Text(milk.rawValue)
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 8)
-                                .background(milkType == milk ? AppGradients.coffeePrimary : AnyShapeStyle(Color.white))
-                                .foregroundStyle(milkType == milk ? .white : Color.primaryText)
-                                .clipShape(Capsule())
-                                .overlay(
-                                    Capsule()
-                                        .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: milkType == milk ? 0 : 1)
-                                )
+                        MilkButton(milk: milk, isSelected: milkType == milk) {
+                            milkType = milk
                         }
                     }
                 }
             }
         }
+    }
+}
+
+struct MilkButton: View {
+    let milk: MilkType
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(milk.rawValue)
+                .font(.caption.weight(.medium))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .foregroundStyle(isSelected ? .white : Color.primaryText)
+                .background {
+                    if isSelected {
+                        Capsule().fill(AppGradients.coffeePrimary)
+                    }
+                }
+                .glassEffect(isSelected ? .clear : .regular.tint(Color.white.opacity(0.5)), in: .capsule)
+        }
+        .sensoryFeedback(.selection, trigger: isSelected)
     }
 }
 
@@ -289,13 +307,15 @@ struct RatingSection: View {
 
     var body: some View {
         FormField(title: "Rating", icon: "star") {
-            HStack(spacing: 8) {
+            HStack(spacing: 12) {
                 ForEach(1...5, id: \.self) { index in
                     Button(action: { rating = index }) {
                         Image(systemName: index <= rating ? "star.fill" : "star")
                             .font(.title)
                             .foregroundStyle(Color.ratingGold)
+                            .symbolEffect(.bounce, value: rating)
                     }
+                    .sensoryFeedback(.impact(flexibility: .soft), trigger: rating)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -313,28 +333,39 @@ struct MoodSection: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(DrinkMood.allCases, id: \.self) { mood in
-                        Button(action: {
+                        MoodButton(mood: mood, isSelected: selectedMood == mood) {
                             selectedMood = selectedMood == mood ? nil : mood
-                        }) {
-                            HStack(spacing: 4) {
-                                Text(mood.icon)
-                                Text(mood.rawValue)
-                            }
-                            .font(.caption)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(selectedMood == mood ? AppGradients.coffeePrimary : AnyShapeStyle(Color.white))
-                            .foregroundStyle(selectedMood == mood ? .white : Color.primaryText)
-                            .clipShape(Capsule())
-                            .overlay(
-                                Capsule()
-                                    .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: selectedMood == mood ? 0 : 1)
-                            )
                         }
                     }
                 }
             }
         }
+    }
+}
+
+struct MoodButton: View {
+    let mood: DrinkMood
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Text(mood.icon)
+                Text(mood.rawValue)
+            }
+            .font(.caption)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .foregroundStyle(isSelected ? .white : Color.primaryText)
+            .background {
+                if isSelected {
+                    Capsule().fill(AppGradients.coffeePrimary)
+                }
+            }
+            .glassEffect(isSelected ? .clear : .regular.tint(Color.white.opacity(0.5)), in: .capsule)
+        }
+        .sensoryFeedback(.selection, trigger: isSelected)
     }
 }
 
@@ -349,7 +380,7 @@ struct TagsSection: View {
                 // Tag input field
                 HStack {
                     TextField("Add a tag", text: $newTag)
-                        .textFieldStyle(CoffeeTextFieldStyle())
+                        .textFieldStyle(GlassTextFieldStyle())
                         .submitLabel(.done)
                         .onSubmit {
                             addTag()
@@ -377,9 +408,8 @@ struct TagsSection: View {
                             }
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
-                            .background(Color.coffeeBrown.opacity(0.1))
                             .foregroundStyle(Color.coffeeBrown)
-                            .clipShape(Capsule())
+                            .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.2)), in: .capsule)
                         }
                     }
                 }
@@ -454,14 +484,13 @@ struct FormField<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 6) {
                 Image(systemName: icon)
                     .foregroundStyle(Color.coffeeBrown)
                     .font(.subheadline)
                 Text(title)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color.primaryText)
             }
             content
@@ -469,17 +498,12 @@ struct FormField<Content: View>: View {
     }
 }
 
-// MARK: - Custom Text Field Style
-struct CoffeeTextFieldStyle: TextFieldStyle {
+// MARK: - Glass Text Field Style
+struct GlassTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .padding(12)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: 1)
-            )
+            .padding(14)
+            .glassEffect(.regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 16))
     }
 }
 
@@ -496,12 +520,7 @@ struct BottomButtonSection: View {
                     .foregroundStyle(Color.coffeeBrown)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.coffeeBrown, lineWidth: 1)
-                    )
+                    .glassEffect(.regular.tint(Color.white.opacity(0.5)), in: .rect(cornerRadius: 20))
             }
 
             Button(action: onSave) {
@@ -510,12 +529,12 @@ struct BottomButtonSection: View {
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(AppGradients.coffeePrimary)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .background(AppGradients.coffeePrimary, in: RoundedRectangle(cornerRadius: 20))
             }
+            .sensoryFeedback(.success, trigger: UUID())
         }
         .padding(16)
-        .background(.ultraThinMaterial)
+        .glassEffect(.regular.tint(Color.white.opacity(0.3)), in: .rect(topLeadingRadius: 24, topTrailingRadius: 24))
     }
 }
 

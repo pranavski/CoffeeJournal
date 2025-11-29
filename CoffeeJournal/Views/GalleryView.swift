@@ -33,7 +33,7 @@ struct GalleryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.creamBackground
+                AppGradients.meshBackground
                     .ignoresSafeArea()
 
                 VStack(spacing: 0) {
@@ -54,10 +54,9 @@ struct GalleryView: View {
                         }
                     }
                 }
-                .padding(.bottom, 80)
             }
             .navigationTitle("Gallery")
-            .navigationBarTitleDisplayMode(.large)
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .searchable(text: $searchText, prompt: "Search drinks...")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -72,6 +71,7 @@ struct GalleryView: View {
                         Image(systemName: viewMode == .grid ? "square.grid.2x2" : "list.bullet")
                             .foregroundStyle(Color.coffeeBrown)
                     }
+                    .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.1)), in: .circle)
                 }
             }
         }
@@ -84,7 +84,7 @@ struct FilterSection: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 FilterPill(title: "All", isSelected: selectedFilter == nil) {
                     selectedFilter = nil
                 }
@@ -112,27 +112,26 @@ struct FilterPill: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.subheadline.weight(.medium))
                 .foregroundStyle(isSelected ? .white : Color.coffeeBrown)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-                .background(
-                    isSelected ? AnyShapeStyle(AppGradients.coffeePrimary) : AnyShapeStyle(Color.white)
-                )
-                .clipShape(Capsule())
-                .overlay(
-                    Capsule()
-                        .stroke(Color.coffeeBrown.opacity(0.2), lineWidth: isSelected ? 0 : 1)
-                )
+                .padding(.vertical, 10)
+                .background {
+                    if isSelected {
+                        Capsule()
+                            .fill(AppGradients.coffeePrimary)
+                    }
+                }
+                .glassEffect(isSelected ? .clear : .regular.tint(Color.white.opacity(0.4)), in: .capsule)
         }
+        .sensoryFeedback(.selection, trigger: isSelected)
     }
 }
 
 // MARK: - Gallery Grid View
 struct GalleryGridView: View {
     let entries: [DrinkEntry]
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 12) {
@@ -160,16 +159,20 @@ struct GalleryGridItem: View {
                     .scaledToFill()
             } else {
                 AppGradients.warmGradient
+                    .overlay {
+                        Text(entry.drinkType.emoji)
+                            .font(.system(size: 40))
+                    }
             }
         }
-        .frame(height: 160)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .frame(height: 180)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .overlay(alignment: .bottomLeading) {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(entry.specificDrink.isEmpty ? entry.drinkType.rawValue : entry.specificDrink)
-                    .font(.caption)
-                    .fontWeight(.semibold)
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(.white)
+                    .lineLimit(1)
 
                 HStack(spacing: 2) {
                     ForEach(1...5, id: \.self) { index in
@@ -179,18 +182,11 @@ struct GalleryGridItem: View {
                     }
                 }
             }
-            .padding(10)
+            .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                LinearGradient(
-                    colors: [.black.opacity(0.7), .clear],
-                    startPoint: .bottom,
-                    endPoint: .top
-                )
-            )
+            .background(.ultraThinMaterial, in: UnevenRoundedRectangle(bottomLeadingRadius: 20, bottomTrailingRadius: 20))
         }
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.1), radius: 5, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
@@ -207,26 +203,31 @@ struct GalleryListView: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding(16)
+        .padding(.vertical, 16)
     }
 }
 
 // MARK: - Empty State
 struct GalleryEmptyState: View {
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
+            Spacer()
+
             Image(systemName: "photo.on.rectangle.angled")
-                .font(.system(size: 64))
+                .font(.system(size: 72))
                 .foregroundStyle(Color.coffeeBrown.opacity(0.3))
+                .symbolEffect(.pulse)
 
             Text("No entries found")
-                .font(.headline)
-                .foregroundStyle(Color.secondaryText)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(Color.primaryText)
 
             Text("Try adjusting your filters or add a new drink!")
                 .font(.subheadline)
                 .foregroundStyle(Color.secondaryText)
                 .multilineTextAlignment(.center)
+
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(32)

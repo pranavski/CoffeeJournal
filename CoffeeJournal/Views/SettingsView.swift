@@ -22,7 +22,7 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            Color.creamBackground
+            AppGradients.meshBackground
                 .ignoresSafeArea()
 
             List {
@@ -47,6 +47,7 @@ struct SettingsView: View {
                     Label("Profile", systemImage: "person.fill")
                         .foregroundStyle(Color.coffeeBrown)
                 }
+                .listRowBackground(Color.white.opacity(0.5))
 
                 // Preferences Section
                 Section {
@@ -66,6 +67,7 @@ struct SettingsView: View {
                             selection: $reminderTime,
                             displayedComponents: .hourAndMinute
                         )
+                        .tint(Color.coffeeBrown)
                     }
 
                     Picker(selection: $defaultDrinkType) {
@@ -75,10 +77,12 @@ struct SettingsView: View {
                     } label: {
                         Label("Default Drink", systemImage: "cup.and.saucer")
                     }
+                    .tint(Color.coffeeBrown)
                 } header: {
                     Label("Preferences", systemImage: "gearshape.fill")
                         .foregroundStyle(Color.coffeeBrown)
                 }
+                .listRowBackground(Color.white.opacity(0.5))
 
                 // Data Section
                 Section {
@@ -96,20 +100,21 @@ struct SettingsView: View {
                 } footer: {
                     Text("You have \(entries.count) drink entries saved.")
                 }
+                .listRowBackground(Color.white.opacity(0.5))
 
                 // About Section
                 Section {
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("1.0.0")
+                        Text("2.0.0")
                             .foregroundStyle(Color.secondaryText)
                     }
 
                     HStack {
                         Text("Build")
                         Spacer()
-                        Text("2025.1")
+                        Text("iOS 26")
                             .foregroundStyle(Color.secondaryText)
                     }
 
@@ -126,11 +131,13 @@ struct SettingsView: View {
                     Label("About", systemImage: "info.circle.fill")
                         .foregroundStyle(Color.coffeeBrown)
                 }
+                .listRowBackground(Color.white.opacity(0.5))
             }
             .scrollContentBackground(.hidden)
+            .listStyle(.insetGrouped)
         }
         .navigationTitle("Settings")
-        .navigationBarTitleDisplayMode(.large)
+        .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         .alert("Clear All Data?", isPresented: $showClearDataAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Clear All", role: .destructive) {
@@ -187,7 +194,7 @@ struct SettingsView: View {
         // Create notification content
         let content = UNMutableNotificationContent()
         content.title = "Time for your coffee!"
-        content.body = "Don't forget to log your drink in Brew Notes ☕"
+        content.body = "Don't forget to log your drink in Brew Notes"
         content.sound = .default
 
         // Extract hour and minute from reminderTime
@@ -249,39 +256,41 @@ struct PrivacyPolicyView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Last Updated: January 2025")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+            ZStack {
+                AppGradients.meshBackground
+                    .ignoresSafeArea()
 
-                    Group {
-                        Text("Data Collection")
-                            .font(.headline)
-                        Text("Brew Notes stores all your data locally on your device. We do not collect, transmit, or store any of your personal information on external servers.")
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Last Updated: 2025")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
 
-                        Text("Photos")
-                            .font(.headline)
-                        Text("Photos you take within the app are stored locally on your device and are never uploaded to any server.")
+                        PolicySection(title: "Data Collection") {
+                            Text("Brew Notes stores all your data locally on your device. We do not collect, transmit, or store any of your personal information on external servers.")
+                        }
 
-                        Text("Analytics")
-                            .font(.headline)
-                        Text("This app does not use any third-party analytics or tracking services.")
+                        PolicySection(title: "Photos") {
+                            Text("Photos you take within the app are stored locally on your device and are never uploaded to any server.")
+                        }
 
-                        Text("Data Sharing")
-                            .font(.headline)
-                        Text("Your data is yours. We do not share any information with third parties. When you export your data, it is shared only through your chosen method.")
+                        PolicySection(title: "Analytics") {
+                            Text("This app does not use any third-party analytics or tracking services.")
+                        }
 
-                        Text("Contact")
-                            .font(.headline)
-                        Text("If you have any questions about this privacy policy, please contact us through the App Store.")
+                        PolicySection(title: "Data Sharing") {
+                            Text("Your data is yours. We do not share any information with third parties. When you export your data, it is shared only through your chosen method.")
+                        }
+
+                        PolicySection(title: "Contact") {
+                            Text("If you have any questions about this privacy policy, please contact us through the App Store.")
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
-            .background(Color.creamBackground)
             .navigationTitle("Privacy Policy")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
@@ -298,39 +307,41 @@ struct TermsOfServiceView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Last Updated: January 2025")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+            ZStack {
+                AppGradients.meshBackground
+                    .ignoresSafeArea()
 
-                    Group {
-                        Text("Acceptance of Terms")
-                            .font(.headline)
-                        Text("By using Brew Notes, you agree to these terms of service. If you do not agree, please do not use the app.")
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Last Updated: 2025")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
 
-                        Text("Use of the App")
-                            .font(.headline)
-                        Text("Brew Notes is provided for personal use to track and journal your coffee and drink experiences. You may not use the app for any illegal or unauthorized purpose.")
+                        PolicySection(title: "Acceptance of Terms") {
+                            Text("By using Brew Notes, you agree to these terms of service. If you do not agree, please do not use the app.")
+                        }
 
-                        Text("User Content")
-                            .font(.headline)
-                        Text("You retain all rights to the content you create within the app, including photos and notes. We do not claim any ownership over your content.")
+                        PolicySection(title: "Use of the App") {
+                            Text("Brew Notes is provided for personal use to track and journal your coffee and drink experiences. You may not use the app for any illegal or unauthorized purpose.")
+                        }
 
-                        Text("Disclaimer")
-                            .font(.headline)
-                        Text("The app is provided \"as is\" without warranties of any kind. We are not responsible for any data loss that may occur.")
+                        PolicySection(title: "User Content") {
+                            Text("You retain all rights to the content you create within the app, including photos and notes. We do not claim any ownership over your content.")
+                        }
 
-                        Text("Changes to Terms")
-                            .font(.headline)
-                        Text("We may update these terms from time to time. Continued use of the app constitutes acceptance of any changes.")
+                        PolicySection(title: "Disclaimer") {
+                            Text("The app is provided \"as is\" without warranties of any kind. We are not responsible for any data loss that may occur.")
+                        }
+
+                        PolicySection(title: "Changes to Terms") {
+                            Text("We may update these terms from time to time. Continued use of the app constitutes acceptance of any changes.")
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
-            .background(Color.creamBackground)
             .navigationTitle("Terms of Service")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") { dismiss() }
@@ -338,6 +349,25 @@ struct TermsOfServiceView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Policy Section
+struct PolicySection<Content: View>: View {
+    let title: String
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color.primaryText)
+            content
+                .foregroundStyle(Color.secondaryText)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassEffect(.regular.tint(Color.white.opacity(0.4)), in: .rect(cornerRadius: 16))
     }
 }
 

@@ -9,8 +9,8 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background
-                Color.creamBackground
+                // iOS 26 Mesh Gradient Background
+                AppGradients.meshBackground
                     .ignoresSafeArea()
 
                 ScrollView {
@@ -34,22 +34,19 @@ struct HomeView: View {
                         Spacer()
                         FABButton(showCamera: $showCamera)
                             .padding(.trailing, 24)
-                            .padding(.bottom, 100)
+                            .padding(.bottom, 24)
                     }
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Brew Notes")
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Brew Notes")
-                        .font(.headline)
-                        .foregroundStyle(Color.primaryText)
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gearshape.fill")
                             .foregroundStyle(Color.coffeeBrown)
                     }
+                    .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.1)), in: .circle)
                 }
             }
         }
@@ -61,14 +58,14 @@ struct WelcomeSection: View {
     var body: some View {
         VStack(spacing: 8) {
             Text("Hello, Friend!")
-                .font(.system(size: 28, weight: .bold))
+                .font(.system(size: 32, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.primaryText)
 
             Text("What will you drink today?")
                 .font(.subheadline)
                 .foregroundStyle(Color.secondaryText)
         }
-        .padding(.top, 24)
+        .padding(.top, 16)
     }
 }
 
@@ -110,27 +107,22 @@ struct StatCard: View {
     let icon: String
 
     var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundStyle(Color.coffeeBrown)
-                Spacer()
-            }
-            HStack {
-                Text(value)
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundStyle(Color.coffeeBrown)
-                Spacer()
-            }
-            HStack {
-                Text(label)
-                    .font(.caption)
-                    .foregroundStyle(Color.secondaryText)
-                Spacer()
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            Image(systemName: icon)
+                .font(.title3)
+                .foregroundStyle(Color.coffeeBrown)
+
+            Text(value)
+                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.primaryText)
+
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(Color.secondaryText)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .liquidGlass(cornerRadius: 16)
+        .glassEffect(.regular.tint(Color.white.opacity(0.3)), in: .rect(cornerRadius: 20))
     }
 }
 
@@ -141,7 +133,7 @@ struct RecentEntriesSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Recent Entries")
-                .font(.headline)
+                .font(.title3.bold())
                 .foregroundStyle(Color.primaryText)
                 .padding(.horizontal, 16)
 
@@ -166,28 +158,28 @@ struct EntryCard: View {
         HStack(spacing: 12) {
             // Thumbnail
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(AppGradients.warmGradient)
-                    .frame(width: 70, height: 70)
-
                 if let photoData = entry.photoData,
                    let uiImage = UIImage(data: photoData) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 70, height: 70)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                 } else {
-                    Text(entry.drinkType.emoji)
-                        .font(.system(size: 28))
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(AppGradients.warmGradient)
+                        .frame(width: 70, height: 70)
+                        .overlay {
+                            Text(entry.drinkType.emoji)
+                                .font(.system(size: 28))
+                        }
                 }
             }
 
             // Info
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.specificDrink.isEmpty ? entry.drinkType.rawValue : entry.specificDrink)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color.primaryText)
 
                 Text(entry.createdAt.formatted(date: .abbreviated, time: .shortened))
@@ -207,34 +199,34 @@ struct EntryCard: View {
 
             Image(systemName: "chevron.right")
                 .foregroundStyle(Color.secondaryText)
+                .font(.caption.weight(.semibold))
         }
         .padding(12)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+        .glassEffect(.regular.tint(Color.white.opacity(0.4)), in: .rect(cornerRadius: 20))
         .padding(.horizontal, 16)
     }
 }
 
 struct EmptyStateView: View {
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             Image(systemName: "cup.and.saucer")
-                .font(.system(size: 48))
+                .font(.system(size: 56))
                 .foregroundStyle(Color.coffeeBrown.opacity(0.5))
+                .symbolEffect(.pulse)
 
             Text("No entries yet")
                 .font(.headline)
-                .foregroundStyle(Color.secondaryText)
+                .foregroundStyle(Color.primaryText)
 
             Text("Tap the camera button to log your first drink!")
-                .font(.caption)
+                .font(.subheadline)
                 .foregroundStyle(Color.secondaryText)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
-        .padding(32)
-        .liquidGlass(cornerRadius: 16)
+        .padding(40)
+        .glassEffect(.regular.tint(Color.white.opacity(0.3)), in: .rect(cornerRadius: 24))
         .padding(.horizontal, 16)
     }
 }
@@ -245,17 +237,14 @@ struct FABButton: View {
 
     var body: some View {
         Button(action: { showCamera = true }) {
-            ZStack {
-                Circle()
-                    .fill(AppGradients.coffeePrimary)
-                    .frame(width: 64, height: 64)
-                    .shadow(color: Color.coffeeBrown.opacity(0.4), radius: 10, y: 5)
-
-                Image(systemName: "camera.fill")
-                    .font(.system(size: 24))
-                    .foregroundStyle(.white)
-            }
+            Image(systemName: "camera.fill")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 64, height: 64)
+                .background(AppGradients.coffeePrimary, in: Circle())
+                .shadow(color: Color.coffeeBrown.opacity(0.4), radius: 12, y: 6)
         }
+        .sensoryFeedback(.impact(flexibility: .soft), trigger: showCamera)
     }
 }
 

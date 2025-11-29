@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A0DB2DBEF12D644609293A9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F7A1845AAEB06CEE44878C /* SettingsView.swift */; };
+		2E5FBF1A8C2534FB6FAFFEC3 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35125BD46145BFA54D73E0BC /* Theme.swift */; };
+		3B2E00E2D886E814B36EFFAB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0068B57C3BA3B40FC5E13F37 /* ProfileView.swift */; };
+		3F1DB0FCE32A66A079E0E90F /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D158CD6E19FE0686063E3B9 /* EntryDetailView.swift */; };
+		4C13E945FDBD5034640D97B8 /* EditEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E527A6CA2B059F181F69EC30 /* EditEntryView.swift */; };
+		69980BC332B60CAAB9AF2919 /* DrinkEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EBDCAF6214EAF5475E72E3 /* DrinkEntry.swift */; };
+		8B605D5FC8EEAC9D39E44E86 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6CBDD0E81DFE2DB5B6FC26 /* ContentView.swift */; };
+		989812F7FC0A8B308F0702E2 /* CameraCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969AF17B63CB2FE8CCE0B7F8 /* CameraCaptureView.swift */; };
+		9B7D334EA9C43E554BAD3E66 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571DB48138479A8D199AF273 /* AddEntryView.swift */; };
+		D69CA039CB90646A157CAD9D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030631FF8D387E65DC2E4EF9 /* HomeView.swift */; };
+		D9497CF7BF4C31C3387E1C56 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B24F09BC26976A12B3BB8 /* GalleryView.swift */; };
+		F4E5C5A966DF9EDF1A0EE08F /* CoffeeJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B0BAC1E5627E4B96D19820 /* CoffeeJournalApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0068B57C3BA3B40FC5E13F37 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		030631FF8D387E65DC2E4EF9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2D158CD6E19FE0686063E3B9 /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailView.swift; sourceTree = "<group>"; };
+		35125BD46145BFA54D73E0BC /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		43EBDCAF6214EAF5475E72E3 /* DrinkEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkEntry.swift; sourceTree = "<group>"; };
+		571DB48138479A8D199AF273 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryView.swift; sourceTree = "<group>"; };
+		70F7A1845AAEB06CEE44878C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		969AF17B63CB2FE8CCE0B7F8 /* CameraCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureView.swift; sourceTree = "<group>"; };
+		9A6CBDD0E81DFE2DB5B6FC26 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B2B0BAC1E5627E4B96D19820 /* CoffeeJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeJournalApp.swift; sourceTree = "<group>"; };
+		E2DA56FA0E90D4BFF047D618 /* CoffeeJournal.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CoffeeJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E527A6CA2B059F181F69EC30 /* EditEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntryView.swift; sourceTree = "<group>"; };
+		F43B24F09BC26976A12B3BB8 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		17980A75CB5E9B52C7532C74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E2DA56FA0E90D4BFF047D618 /* CoffeeJournal.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28B7D6D1633FA6FAC470E8B0 = {
+			isa = PBXGroup;
+			children = (
+				ADD06546D86EEF5D79F441FA /* CoffeeJournal */,
+				17980A75CB5E9B52C7532C74 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4A16779F29C01A0CA3584F6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				43EBDCAF6214EAF5475E72E3 /* DrinkEntry.swift */,
+				35125BD46145BFA54D73E0BC /* Theme.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ADD06546D86EEF5D79F441FA /* CoffeeJournal */ = {
+			isa = PBXGroup;
+			children = (
+				B2B0BAC1E5627E4B96D19820 /* CoffeeJournalApp.swift */,
+				9A6CBDD0E81DFE2DB5B6FC26 /* ContentView.swift */,
+				4A16779F29C01A0CA3584F6C /* Models */,
+				F43AACD299E43DAA893EC253 /* Views */,
+			);
+			path = CoffeeJournal;
+			sourceTree = "<group>";
+		};
+		F43AACD299E43DAA893EC253 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				571DB48138479A8D199AF273 /* AddEntryView.swift */,
+				969AF17B63CB2FE8CCE0B7F8 /* CameraCaptureView.swift */,
+				E527A6CA2B059F181F69EC30 /* EditEntryView.swift */,
+				2D158CD6E19FE0686063E3B9 /* EntryDetailView.swift */,
+				F43B24F09BC26976A12B3BB8 /* GalleryView.swift */,
+				030631FF8D387E65DC2E4EF9 /* HomeView.swift */,
+				0068B57C3BA3B40FC5E13F37 /* ProfileView.swift */,
+				70F7A1845AAEB06CEE44878C /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07F6711A82297120D3A454BD /* CoffeeJournal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD8DAEA9DC81EA512DAF027A /* Build configuration list for PBXNativeTarget "CoffeeJournal" */;
+			buildPhases = (
+				03948B7BFCEB5A1FB09099A2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoffeeJournal;
+			packageProductDependencies = (
+			);
+			productName = CoffeeJournal;
+			productReference = E2DA56FA0E90D4BFF047D618 /* CoffeeJournal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A5FED23BFFEABB3A6C9DF8D1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					07F6711A82297120D3A454BD = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 467578E6B95AC3AC2DBC85E7 /* Build configuration list for PBXProject "CoffeeJournal" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 28B7D6D1633FA6FAC470E8B0;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07F6711A82297120D3A454BD /* CoffeeJournal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03948B7BFCEB5A1FB09099A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B7D334EA9C43E554BAD3E66 /* AddEntryView.swift in Sources */,
+				989812F7FC0A8B308F0702E2 /* CameraCaptureView.swift in Sources */,
+				F4E5C5A966DF9EDF1A0EE08F /* CoffeeJournalApp.swift in Sources */,
+				8B605D5FC8EEAC9D39E44E86 /* ContentView.swift in Sources */,
+				69980BC332B60CAAB9AF2919 /* DrinkEntry.swift in Sources */,
+				4C13E945FDBD5034640D97B8 /* EditEntryView.swift in Sources */,
+				3F1DB0FCE32A66A079E0E90F /* EntryDetailView.swift in Sources */,
+				D9497CF7BF4C31C3387E1C56 /* GalleryView.swift in Sources */,
+				D69CA039CB90646A157CAD9D /* HomeView.swift in Sources */,
+				3B2E00E2D886E814B36EFFAB /* ProfileView.swift in Sources */,
+				2A0DB2DBEF12D644609293A9 /* SettingsView.swift in Sources */,
+				2E5FBF1A8C2534FB6FAFFEC3 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0362C40E086036946410FCE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CoffeeJournal needs camera access to take photos of your drinks";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CoffeeJournal needs photo library access to save and select drink photos";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pranavski.CoffeeJournal;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A07D286651269A45E4C9C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		448B09DD87B836EEBF855FC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CoffeeJournal needs camera access to take photos of your drinks";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CoffeeJournal needs photo library access to save and select drink photos";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pranavski.CoffeeJournal;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A3EFB17608F029B4C3747E70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		467578E6B95AC3AC2DBC85E7 /* Build configuration list for PBXProject "CoffeeJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3EFB17608F029B4C3747E70 /* Debug */,
+				1A07D286651269A45E4C9C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CD8DAEA9DC81EA512DAF027A /* Build configuration list for PBXNativeTarget "CoffeeJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0362C40E086036946410FCE9 /* Debug */,
+				448B09DD87B836EEBF855FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A5FED23BFFEABB3A6C9DF8D1 /* Project object */;
+}

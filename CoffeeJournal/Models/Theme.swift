@@ -7,9 +7,9 @@ extension Color {
     static let matchaGreen = Color(hex: "7CB342")
     static let warmAccent = Color(hex: "D4A574")
 
-    // Background Colors
-    static let creamBackground = Color(hex: "F5F1ED")
-    static let cardBackground = Color.white
+    // Background Colors - Updated for iOS 26 Liquid Glass
+    static let creamBackground = Color(hex: "FAF8F5")
+    static let cardBackground = Color.white.opacity(0.7)
 
     // Text Colors
     static let primaryText = Color(hex: "2C2C2C")
@@ -46,35 +46,29 @@ extension Color {
     }
 }
 
-// MARK: - Liquid Glass Effect Modifier
+// MARK: - iOS 26 Liquid Glass Modifier
 struct LiquidGlassModifier: ViewModifier {
     var cornerRadius: CGFloat = 20
-    var opacity: Double = 0.8
 
     func body(content: Content) -> some View {
         content
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: cornerRadius))
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                .white.opacity(0.6),
-                                .white.opacity(0.1)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
-            )
-            .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+            .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.1)), in: .rect(cornerRadius: cornerRadius))
     }
 }
 
 extension View {
-    func liquidGlass(cornerRadius: CGFloat = 20, opacity: Double = 0.8) -> some View {
-        modifier(LiquidGlassModifier(cornerRadius: cornerRadius, opacity: opacity))
+    func liquidGlass(cornerRadius: CGFloat = 20) -> some View {
+        modifier(LiquidGlassModifier(cornerRadius: cornerRadius))
+    }
+
+    func liquidGlassCard() -> some View {
+        self
+            .glassEffect(.regular.tint(Color.white.opacity(0.3)), in: .rect(cornerRadius: 16))
+    }
+
+    func liquidGlassCapsule() -> some View {
+        self
+            .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.1)), in: .capsule)
     }
 }
 
@@ -97,4 +91,31 @@ struct AppGradients {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
+
+    // New iOS 26 mesh gradients for backgrounds
+    static let meshBackground = MeshGradient(
+        width: 3,
+        height: 3,
+        points: [
+            [0.0, 0.0], [0.5, 0.0], [1.0, 0.0],
+            [0.0, 0.5], [0.5, 0.5], [1.0, 0.5],
+            [0.0, 1.0], [0.5, 1.0], [1.0, 1.0]
+        ],
+        colors: [
+            Color(hex: "FAF8F5"), Color(hex: "F5EFE6"), Color(hex: "FAF8F5"),
+            Color(hex: "F5EFE6"), Color(hex: "EDE4D9"), Color(hex: "F5EFE6"),
+            Color(hex: "FAF8F5"), Color(hex: "F5EFE6"), Color(hex: "FAF8F5")
+        ]
+    )
+}
+
+// MARK: - Custom Button Style with Glass Effect
+struct GlassButtonStyle: ButtonStyle {
+    var isSelected: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+            .animation(.snappy(duration: 0.2), value: configuration.isPressed)
+    }
 }

@@ -12,7 +12,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.creamBackground
+                AppGradients.meshBackground
                     .ignoresSafeArea()
 
                 ScrollView {
@@ -32,11 +32,11 @@ struct ProfileView: View {
                         // About Section
                         AboutSection()
                     }
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 32)
                 }
             }
             .navigationTitle("Profile")
-            .navigationBarTitleDisplayMode(.large)
+            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         }
     }
 }
@@ -48,21 +48,21 @@ struct ProfileHeader: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            // Avatar
+            // Avatar with glass effect
             ZStack {
                 Circle()
                     .fill(AppGradients.warmGradient)
                     .frame(width: 100, height: 100)
 
                 Text("☕")
-                    .font(.system(size: 40))
+                    .font(.system(size: 44))
             }
-            .shadow(color: Color.coffeeBrown.opacity(0.3), radius: 10, y: 5)
+            .glassEffect(.regular.tint(Color.coffeeBrown.opacity(0.2)), in: .circle)
+            .shadow(color: Color.coffeeBrown.opacity(0.2), radius: 16, y: 8)
 
             VStack(spacing: 4) {
                 Text(userName)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.weight(.bold))
                     .foregroundStyle(Color.primaryText)
 
                 Text(userHandle)
@@ -70,7 +70,7 @@ struct ProfileHeader: View {
                     .foregroundStyle(Color.secondaryText)
             }
         }
-        .padding(.top, 24)
+        .padding(.top, 16)
     }
 }
 
@@ -118,17 +118,12 @@ struct StatisticsSection: View {
             SectionHeader(title: "Statistics", icon: "chart.bar.fill")
 
             VStack(spacing: 0) {
-                StatRow(label: "Total Drinks", value: "\(totalDrinks)")
-                Divider().padding(.horizontal, 16)
-                StatRow(label: "Current Streak", value: "\(currentStreak) days")
-                Divider().padding(.horizontal, 16)
-                StatRow(label: "Favorite Drink", value: favoriteDrink)
-                Divider().padding(.horizontal, 16)
-                StatRow(label: "Average Rating", value: String(format: "%.1f ★", averageRating))
+                StatRow(label: "Total Drinks", value: "\(totalDrinks)", icon: "cup.and.saucer.fill")
+                StatRow(label: "Current Streak", value: "\(currentStreak) days", icon: "flame.fill")
+                StatRow(label: "Favorite Drink", value: favoriteDrink, icon: "heart.fill")
+                StatRow(label: "Average Rating", value: String(format: "%.1f ★", averageRating), icon: "star.fill")
             }
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+            .glassEffect(.regular.tint(Color.white.opacity(0.4)), in: .rect(cornerRadius: 20))
         }
         .padding(.horizontal, 16)
     }
@@ -137,17 +132,27 @@ struct StatisticsSection: View {
 struct StatRow: View {
     let label: String
     let value: String
+    let icon: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.body)
+                .foregroundStyle(Color.coffeeBrown)
+                .frame(width: 24)
+
             Text(label)
                 .foregroundStyle(Color.primaryText)
+
             Spacer()
+
             Text(value)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color.coffeeBrown)
+                .lineLimit(1)
         }
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
     }
 }
 
@@ -162,12 +167,9 @@ struct PreferencesSection: View {
 
             VStack(spacing: 0) {
                 ToggleRow(label: "Dark Mode", icon: "moon.fill", isOn: $darkMode)
-                Divider().padding(.horizontal, 16)
                 ToggleRow(label: "Daily Reminder", icon: "bell.fill", isOn: $dailyReminder)
             }
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+            .glassEffect(.regular.tint(Color.white.opacity(0.4)), in: .rect(cornerRadius: 20))
         }
         .padding(.horizontal, 16)
     }
@@ -179,8 +181,9 @@ struct ToggleRow: View {
     @Binding var isOn: Bool
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Image(systemName: icon)
+                .font(.body)
                 .foregroundStyle(Color.coffeeBrown)
                 .frame(width: 24)
 
@@ -192,7 +195,8 @@ struct ToggleRow: View {
             Toggle("", isOn: $isOn)
                 .tint(Color.coffeeBrown)
         }
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
     }
 }
 
@@ -203,13 +207,11 @@ struct AboutSection: View {
             SectionHeader(title: "About", icon: "info.circle.fill")
 
             VStack(spacing: 0) {
-                AboutRow(label: "Version", value: "1.0.0")
-                Divider().padding(.horizontal, 16)
-                AboutRow(label: "Made with", value: "☕ & ❤️")
+                AboutRow(label: "Version", value: "2.0.0", icon: "number")
+                AboutRow(label: "Built for", value: "iOS 26", icon: "apple.logo")
+                AboutRow(label: "Made with", value: "☕ & ❤️", icon: "heart.fill")
             }
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.05), radius: 5, y: 2)
+            .glassEffect(.regular.tint(Color.white.opacity(0.4)), in: .rect(cornerRadius: 20))
         }
         .padding(.horizontal, 16)
     }
@@ -218,16 +220,25 @@ struct AboutSection: View {
 struct AboutRow: View {
     let label: String
     let value: String
+    let icon: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.body)
+                .foregroundStyle(Color.coffeeBrown)
+                .frame(width: 24)
+
             Text(label)
                 .foregroundStyle(Color.primaryText)
+
             Spacer()
+
             Text(value)
                 .foregroundStyle(Color.secondaryText)
         }
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
     }
 }
 
